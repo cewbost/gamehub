@@ -1,0 +1,12 @@
+{% load urlify %}
+<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+Facebook
+</a>
+<a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>
+  Google+
+</a>
+<a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ game.title|twitterurlify  }}.">Reddit</a>
+
+<a href="https://twitter.com/home?status={{ game.description|truncatechars:80|twitterurlify }}%20{{ request.build_absolute_uri }}">
+Twitter
+</a>

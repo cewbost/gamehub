@@ -1,0 +1,7 @@
+{% extends "gamehub/base.html" %}
+{% block content %}
+<form method="post">{% csrf_token %}
+    <p>"{{ object }}" would be deleted?</p>
+    <input type="submit" value="Confirm" />
+</form>
+{% endblock %}

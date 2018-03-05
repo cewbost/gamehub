@@ -1,0 +1,7 @@
+{% extends 'gamehub/base.html' %}
+{% block content %}
+<form method="post" enctype='multipart/form-data'>
+    {% include 'accounts/form.html' %}
+    <button type="submit" class="btn btn-primary" >Update Profile</button>
+</form>
+{% endblock %}

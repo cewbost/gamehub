@@ -1,0 +1,79 @@
+{% extends 'gamehub/base.html' %}
+{% load staticfiles %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/rating.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- <div class="container"> -->
+<div class="panel-default">
+  <div class="panel-heading">
+    {% if game.gameimage %}
+    <img src="{{game.gameimage.url}}" alt="{{game.title}}" class="img-responsive" style="width: 100%" />
+    {% endif %}
+  </div>
+  <div class="panel-body">
+    <h1 class="text-center text-uppercase">{{game.title}}</h1>
+    <div class="description-box">
+        <p>{{game.description}}</p>
+        <p class="read-more"><a href="#" class="btn btn-primary">Read More</a></p>
+    </div>
+    <p>
+      {% if not game_owner %}
+      <a class="btn btn-primary mt-1"  href="{% url 'game:purchase' game=game.id %}">Buy</a>
+      {% endif %}
+    </p>
+    <div class="d-block text-center">
+      {% if game_owner %}
+        <input type="hidden" id="game_highscore_url" value="{% url 'game:highscore' game=game.id %}" />
+        <input type="hidden" id="game_update_url" value="{% url 'game:update' game=game.id %}" />
+        <input type="hidden" id="game_rate_url" value="{% url 'game:rate' game=game.id %}" />
+        {% comment %}
+          The SETTINGS message in the game sends the width and height to the platform and would be rendered accordingly
+        {% endcomment %}
+        <div class="wrapper">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe id="game_iframe" src="{{game.url}}"></iframe>
+          </div>
+        </div>
+        <div>
+          <strong>Highest Gamescore is:</strong>
+          <p id="gameresult">
+            loading...
+          </p>
+        </div>
+      {% endif %}
+    </div>
+    <div class="row ratings">
+      {% if user.is_authenticated %}
+        <p>Rate this game: </p>
+      {% endif %}
+      {% include "game/rating.html" with starId="rate-" stars=rating %}
+    </div>
+    {% with request as request %}
+      {% with game as game %}
+        {% include 'game/socialshare.html' %}
+      {% endwith %}
+    {% endwith %}
+  </div>
+</div>
+<!-- </div>-->
+{% endblock %}
+{% comment %}
+  Meta Data for opengraphsearch would be included in the game!
+{% endcomment %}
+{% block opengraphsearch %}
+<meta property="og:title" content="{{game.title}}" />
+<meta property="og:type" content="image" />
+<meta property="og:url" content="{{request.build_absolute_uri}}" />
+<meta property="og:description" content="{{game.description}}" />
+{% if game.gameimage %}
+  <meta property="og:image" content="{{game.gameimage.url}}" />
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/game.js' %}"></script>
+<script src="{% static 'js/rating.js' %}"></script>
+{% endblock %}

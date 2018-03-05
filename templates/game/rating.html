@@ -1,0 +1,15 @@
+{% load range_from %}
+
+{% for i in 5|range_from:"1,2" %}
+  <div class="rating-star" id="{{ starId }}{{ i }}">
+    {% if stars > i %}
+    <span class="star-full">
+    {% elif stars == i %}
+    <span class="star-half">
+    {% else %}
+    <span>
+    {% endif %}
+      <i class="fa fa-star-o"></i>
+    </span>
+  </div>
+{% endfor %}

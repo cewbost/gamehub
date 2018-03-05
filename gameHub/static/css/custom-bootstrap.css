@@ -1,0 +1,171 @@
+:root{
+    --lightgrey-background: #f1f1f1;
+    --bordeaux-secondary: #ad3e3e;
+    --bar-color: white;
+    --button-nav-color: #a1a7b2;
+    --button-hover-nav-color: white;
+    --dark-text-color: #5a5a5a;
+    --footer-height: 60px;
+    --panel-padding: 15px;
+}
+
+html{
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /*allows footer position absolute*/
+    margin-bottom: var(--footer-height);
+    background-color: var(--lightgrey-background);
+    /*carousel padding override*/
+    padding: 0;
+}
+
+footer {
+    background-color: var(--bar-color);
+    position: absolute;
+    bottom: 0;
+    height: var(--footer-height);
+    width: 100%;
+}
+
+.card {
+	background-color: var(--lightgrey-background);
+}
+
+.bg-light {
+    background-color: var(--bar-color) !important;
+}
+
+.btn-space {
+    margin-right: 5px;
+}
+
+.btn-outline-navbar{
+  color: var(--button-nav-color);
+  background-color: transparent;
+  background-image: none;
+  border-color: var(--button-nav-color);
+}
+
+.btn-outline-navbar:hover {
+  color: var(--button-hover-nav-color);
+  background-color: var(--button-nav-color);
+  border-color: var(--button-hover-nav-color);
+}
+
+.panel {
+    /*Margin bottom are creating in order to let the footer to be absolute
+      Margin top are calculated in order to leave the same space of the bottom*/
+    margin-top: 15px;
+    margin-bottom: calc(var(--footer-height) + var(--panel-padding));
+    padding: 15px;
+    /*padding-bottom: 15px;*/
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    color: var(--dark-text-color);
+}
+.panel-default {
+    border: 1px solid #b9bbbe;
+}
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.panel-body {
+    padding: 15px;
+}
+
+.wrapper{
+    width:80%;
+    height:100%;
+    margin:0 auto;
+    background:#CCC
+}
+
+.center_div{
+
+    margin: 0 auto;
+}
+
+.thumbnail {
+    position:relative;
+    overflow:hidden;
+}
+
+/* Not implemented into html */
+.thumbnail-caption{
+    position:absolute;
+    bottom:-25%;
+    right:0;
+    background:rgba(255, 255, 255, 0.75);
+    width:100%;
+    height:25%;
+    padding:2%;
+    text-align:center;
+    color:#fff !important;
+    z-index:2;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.thumbnail:hover .thumbnail-caption{
+    bottom:0;
+}
+
+.thumbnail{
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+.thumbnail:hover {
+    border: 2px solid lightgrey;
+}
+
+.game-reference:hover{
+    text-decoration: none;
+}
+
+.carousel-item.active,
+.carousel-item img{
+    max-width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.border-row{
+    border-bottom: #5a5a5a solid 1px;
+    padding-bottom: 5px;
+}
+
+.description-box {
+  max-height: 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+.description-box .read-more {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0; padding: 30px 0;
+
+  /* "transparent" only works here because == rgba(0,0,0,0) */
+  background-image: linear-gradient(to bottom, transparent, white   );
+}

@@ -1,0 +1,20 @@
+{% extends 'gamehub/base.html' %}
+{% block content %}
+    {% if next %}
+        <form action="{% url 'accounts:login' %}?next={{next}}" method="POST" >
+    {%else%}
+        <form method="POST" action="{% url 'accounts:login' %}">
+    {% endif %}
+        {% include 'accounts/form.html' %}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <div>
+        <a href="{% url 'accounts:register' %}">Register Account</a><br>
+    </div>
+    <hr />
+
+    <div>
+        <h2>Social Login</h2>
+        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-success">Google</a><br>
+    </div>
+{% endblock %}

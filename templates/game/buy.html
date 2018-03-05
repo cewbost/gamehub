@@ -1,0 +1,23 @@
+{% extends 'gamehub/base.html' %}
+{% block content %}
+<form action="http://payments.webcourse.niksula.hut.fi/pay/" method="POST">
+    <input id="id_pid" type="hidden" name="pid" value="{{pid}}" />
+    <input id="id_sid" type="hidden" name="sid" value="{{sid}}" />
+    <label for="id_amount">Amount</label>
+    <input type="text" id="id_amount" name="amount" value="{{amount}}" />
+    <input id="id_success_url" type="hidden" name="success_url"
+    value={{ success_url }} />
+    <input id="id_cancel_url" type="hidden" name="cancel_url"
+            value={{ cancel_url }} />
+    <input type="hidden" name="error_url"
+            value={{ error_url }} />
+    <input id="id_checksum" type="hidden" name="checksum"
+            value="{{ checksum }}" />
+    <input type="submit" value="Accept Payment"/>
+    {% comment %}
+    Failure checked from here as error_url is required to make get request to
+    payment service!
+    <input name="dev" type="checkbox" id="id_dev"/><label for="id_dev">dev</label>
+    {% endcomment %}
+</form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% block content %}
+<h1> Top Games </h1>
+<ul class="list-group">
+{% for game in games %}
+{% with game as game %}
+  {% include 'game/game.html' %}
+{% endwith %}
+{% endfor %}
+</ul>
+{% endblock %}

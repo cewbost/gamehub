@@ -1,0 +1,17 @@
+<div class="infinite-container">
+    <div class="row infinite-item">
+{% for game in games %}
+    <div class="item col-sm-3 mb-4 pl-1 pr-1">
+        {% include 'gamehub/game_thumb.html' %}
+    </div>
+{% endfor %}
+    </div>
+</div>
+
+{% if games.has_next %}
+    <a class="infinite-more-link" href="?page={{ games.next_page_number }}">More</a>
+{% endif %}
+
+<div class="loading" style="display: none;">
+    Loading...
+</div>

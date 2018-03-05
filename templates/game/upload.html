@@ -1,0 +1,9 @@
+{% extends 'gamehub/base.html' %}
+{% block content %}
+<main class="inner cover">
+  <form method="post" enctype='multipart/form-data'>
+      {% include 'accounts/form.html' %}
+      <button type="submit" class="btn btn-primary" >Upload Game</button>
+  </form>
+</main>
+{% endblock content %}

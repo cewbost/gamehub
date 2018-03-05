@@ -1,0 +1,11 @@
+.rating-star > .star-full:before {
+  position: absolute;
+  font-family: FontAwesome;
+  content: "\f005";
+}
+
+.rating-star > .star-half:before {
+  position: absolute;
+  font-family: FontAwesome;
+  content: "\f123";
+}

@@ -1,0 +1,22 @@
+{% extends 'gamehub/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="text-center">
+            <h1>{{ game.title }}</h1>
+            {% if game.gameimage %}
+            <img class="embed-responsive"  src="{{game.gameimage.url}}" alt="{{game.title}}">
+            {% endif %}
+            <h2 class="mt-3 mb-3">Payment date and users</h2>
+        </div>
+        <div class="row">
+            {% for payment_stat in game.gameplayed_set.all %}
+                <div class="col-sm-4 mt-2">
+                    <div class="">
+                        <span class="text-primary">Date: </span><span>{{payment_stat.paymentdetail.selldate}}</span><br>
+                        <span class="text-primary">Purchased by </span><span>{{payment_stat.paymentdetail.user}}</span><br>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

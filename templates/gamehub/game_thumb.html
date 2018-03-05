@@ -1,0 +1,19 @@
+{% if game %}
+<a class="game-reference" href="{% url 'game:detail' game=game.id %}">
+    <div class="thumbnail p-1">
+        <p class="inline text-nowrap text-center mb-0 w-100">{{ game.title }}</p>
+    {% comment %}
+    TOdo feature to consider in future
+        <div class="thumbnail-caption">
+            <p><a class="label text-dark">Sort description of the game</a></p>
+        </div>
+    {% endcomment %}
+        <!-- Todo find some kind of default img for the game without -->
+        {% if game.gamethumb %}
+            <img class="embed-responsive"  src="{{game.gamethumb.url}}" alt="Card image cap">
+        {% else %}
+            {{game.title}}
+        {% endif %}
+    </div>
+</a>
+{% endif %}

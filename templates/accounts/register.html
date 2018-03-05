@@ -1,0 +1,16 @@
+{% extends 'gamehub/base.html' %}
+{% block content %}
+<div class="center_div">
+    <form class="well form-horizontal" method="POST" enctype="multipart/form-data">
+        <fieldset>
+            <h2><b>Registration Form</b></h2><br>
+            {% include 'accounts/form.html' %}
+            <button type="submit" class="btn btn-primary" >Register</button>
+        </fieldset>
+    </form>
+    <div>
+        <h2><b>Social Login</b></h2><br>
+        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-success">Google</a><br>
+    </div>
+</div>
+{% endblock %}

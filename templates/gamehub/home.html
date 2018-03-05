@@ -1,0 +1,51 @@
+{% extends 'gamehub/base.html' %}
+{% block content %}
+<main class="inner cover">
+{% comment %}
+Carousel appears only if games are available
+{% endcomment %}
+{% if games %}
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+    {% for top_game in carousel_games %}
+      <div class="{% cycle "carousel-item active" "carousel-item" "carousel-item" %} row">
+        {% if top_game.gameimage %}
+        <img class="{% cycle "first-slide" "second-slide" "third-slide" %}" src="{{top_game.gameimage.url}}" alt="{% cycle "First Game" "Second Game" "Third Game" %}" />
+        {% endif %}
+        <div class="container">
+          <div class="carousel-caption text-left">
+              <div class="text-center">
+                <a href="{% url 'game:detail' game=top_game.id %}" class="btn btn-primary text-center w-100">Play <br> {{top_game.title}}</a>
+              </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="container mb-3">
+    {% include 'gamehub/card.html' %}
+  </div>
+    {% else %}
+        <div class="container text-center">
+            <h1>No games uploaded yet</h1>
+            <p class="text">Register into the website and upload your game</p>
+        </div>
+{% endif %}
+
+</main>
+{% endblock content %}

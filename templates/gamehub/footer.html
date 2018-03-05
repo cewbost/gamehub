@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<footer class="footer">
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-sx-6">
+                <p>GameHub - Join 4 Fun</p>
+            </div>
+        </div>
+    </div>
+</footer>
+{% comment %}
+<div class="card text-center">
+  <div class="card-header">
+    &copy; WSD Group
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">GameHub - join for fun</h4>
+    <p class="card-text">Do you like game? Do you want to buy and play?Or do you want to sell the game?</p>
+    <p class="card-text">We solve your problem!</p>
+
+    Move login/logout into the navbar
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'accounts:logout' %}" class="btn btn-primary">Logout</a>
+    {% else %}
+    <a href="{% url 'accounts:login' %}" class="btn btn-success">Login to try</a>
+    {% endif %}
+
+  </div>
+  <div class="card-footer text-muted">
+    	&copy; WSD Group
+  </div>
+</div>
+{% endcomment %}

@@ -1,0 +1,12 @@
+{% extends 'gamehub/base.html' %}
+{% block content %}
+<form class="form-inline" method="POST">
+   {% csrf_token %}
+  <div class="form-group">
+    {{ form.group.errors }}
+    <label for="{{ form.group.id_for_label }}" ><span class="label label-info">Choose Group: </span></label>
+    {{ form.group }}
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

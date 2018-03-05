@@ -1,0 +1,90 @@
+{% extends 'gamehub/base.html' %}
+{% load staticfiles %}
+{% load humanize %}
+{% load owns_game %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/rating.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="inner cover">
+  {% if numpages > 0 %}
+    <div class="container" id="results">
+      {% for hit in hits %}
+      <div class="card" id="box-{{ forloop.counter }}">
+        <div class="card-header" data-toggle="collapse" data-target="#desc-{{ forloop.counter }}">
+          <div class="row">
+            <div class="col-md-2" style="height: 100px;">
+              <!-- There should be a default image for no image -->
+              {% if hit.gameimage %}
+                <img alt="{{hit.gameimage.title}}" class="card-img h-100" src="{{ hit.gameimage.url }}">
+              {% else %}
+                <p>No image available.</p>
+              {% endif %}
+            </div>
+            <div class="col-md-10">
+              <h5>{{ hit.title }}</h5>
+              <p>by {{ hit.developer.username }} • {{ hit.sellcount | intword }} sold • uploaded {{ hit.upload_date | timesince }} ago</p>
+              <div class="row ml-1">
+                {% include "game/rating.html" with starId=forloop.counter stars=hit.get_rating_cleaned %}
+              </div>
+              <h6>{{ hit.price | floatformat:2 }}$</h6>
+            </div>
+          </div>
+        </div>
+        <div class="card-block mb-3 mt-1 collapse" id="desc-{{ forloop.counter }}" data-parent="#results">
+          <div class="row">
+            <div class="col-md-10 offset-1">
+              <p>{{ hit.description }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2 offset-5">
+              {% if user.is_authenticated %}
+                {% if user|owns_game:hit %}
+                  <a href="{% url 'game:detail' game=hit.pk %}" class="btn btn-primary" role="button">Play Game!</a>
+                {% else %}
+                  <a href="{% url 'game:purchase' game=hit.pk %}" class="btn btn-primary" role="button">Buy Game!</a>
+                {% endif %}
+              {% else %}
+                <a href="{% url 'accounts:login' %}" class="btn btn-primary" role="button">Login to buy this game.</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="container">
+      <div class="row mt-3 justify-content-center align-items-center">
+        <ul class="pagination">
+          {% if page > 1 %}
+            <li class="page-item"><a class="page-link" href="{% url 'game:search' %}?q={{ query }}&p={{ page | add:"-1" }}">Previous</a></li>
+          {% endif %}
+          {% for pnum in pagelist %}
+            {% if pnum == page %}
+              <li class="page-item active">
+            {% else %}
+              <li class="page-item">
+            {% endif %}
+              <a class="page-link" href="{% url 'game:search' %}?q={{ query }}&p={{ pnum }}">{{ pnum }}</a>
+            </li>
+          {% endfor %}
+          <!--li class="page-item active"><a class="page-link" href="#">{{ page }}</a></li-->
+          {% if page < numpages %}
+            <li class="page-item"><a class="page-link" href="{% url 'game:search' %}?q={{ query }}&p={{ page | add:"1" }}">Next</a></li>
+          {% endif %}
+          <li></li>
+        </ul>
+      </div>
+    </div>
+  {% else %}
+    <div class="container">
+      <div class="row mt-4 mb-4">
+        <h1 class="text-center">No games matched your search query!</h1>
+      </div>
+    </div>
+  {% endif %}
+</main>
+{% endblock content %}
